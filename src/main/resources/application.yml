@@ -1,0 +1,76 @@
+server:
+  port: 18080
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  jpa:
+    database: postgresql
+    #database-platform: org.hibernate.dialect.PostgresSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_schema: zcoa_ams
+  datasource:
+    url: jdbc:postgresql://localhost:15432/zcoa_ams
+    username: zcoa_admin
+    password: Skcc12)(
+    driver-class-name: org.postgresql.Driver
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 300
+  ams:
+    url: jdbc:mariadb://localhost:13306/AMSPRD
+    username: admin
+    password: "!Skcc2023"
+    driver-class-name: org.mariadb.jdbc.Driver
+logging:
+  level:
+    org.springframework: INFO
+    com.ams.backendjpasample: DEBUG
+
+# Swagger springdoc-ui
+springdoc:
+  packages-to-scan: com.ams.amsdatasyncbackend
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: api-doc.html            # Swagger UI 경로 => localhost:8000/demo-ui.html
+    tags-sorter: method            # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
+    operations-sorter: method      # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
+  api-docs:
+    path: /api-docs/json
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+
+# airtable
+airtable:
+  apikey: "patUPcWOhz9UVMk6h.c1d3f619e25ef4eedbafee7d7df37fcf9e1b5c2e01f92a1833a4b46800855616"
+  url: https://api.airtable.com/v0/
+  splitsize: 2500
+  interval: 360000
+  base: app54XOKKOrRsIUkY
+  table: tblSRMI3yU0Tdozvy
+  tables:
+    custCp: tblwZZB6au1xhVPe9
+    hwInfo: tblBfFbppzZIECr5E
+    swInfo: tblbzXIXm8AllYAJu
+    costInfo: tblbcPJykhpGhQQjW
+    hwswRelation: tblhJpPbqalOsyQvJ
+    hwhwRelation: tblh4wOqwDfumcYwh
+    hwipRelation: tblpEqFD28mnMPmtn
+  syncs:
+    custCp: /sync/sn1YdvsT
+    hwInfo: /sync/YAyfjVYF
+    swInfo: /sync/66QaLQpQ
+    costInfo: /sync/0N2y9tTA
+    hwswRelation: /sync/o4mFu5tD
+    hwhwRelation: /sync/3YpDeGs9
+    hwipRelation: /sync/dyMTIZVG
