@@ -22,15 +22,21 @@ public class Team {
     @Column(name = "ID", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "NAME")
-    private String name;
-
-    @Column(name = "LOCATION")
-    private String location;
-
-    @Column(name = "FOUNDED_DATE")
+    @Column(name = "FOUNDED_DATE", nullable = false)
     private String foundedDate;
 
-    @OneToMany
-    private List<Member> members = new ArrayList<>();
+    @Column(name = "LOCATION", nullable = false)
+    private String location;
+
+    @Column(name = "MASCOT", nullable = false)
+    private String mascot;
+
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "ID", referencedColumnName = "TEAM_ID", insertable=false, updatable=false),
+    })
+    private Member member;
 }

@@ -18,6 +18,7 @@ public enum CommonError implements EnumError {
 	INVALID_PARAMETERS			( "CE003", "파라미터가 유효하지 않습니다."),
 	DUPLICATE_DATA				( "CE004", "중복된 데이터 입니다."),
 	INVALID_DOMAIN				( "CE005", "잘못된 Domain 입니다"),
+	UNKNOWN						( "CE006", "알 수 없는 에러가 발생했습니다."),
 
 	BIZ_RUNTIME					( "BZ001", "비즈니스 로직 수행 중 오류"),
 

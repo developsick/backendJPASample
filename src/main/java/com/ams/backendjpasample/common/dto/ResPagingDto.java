@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@ApiModel(value = "ResPagingDto", description = "Paging Items")
 public class ResPagingDto<T> {
 
 //    @ApiModelProperty(value = "Items", required = true, position = 0)
