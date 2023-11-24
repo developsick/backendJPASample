@@ -1,6 +1,7 @@
 package com.ams.backendjpasample.dto.response;
 
 import com.ams.backendjpasample.entity.Member;
+import com.ams.backendjpasample.entity.Team;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,26 +18,36 @@ public class MemberResDto implements Serializable {
 
     private Long id;
     private String firstName;
-    private String joinedDate;
     private String lastName;
-    private String teamId;
+    private String address;
+    private String joinedDate;
+    private Long teamId;
+    private Team team;
 
     public MemberResDto(Member member) {
         this.id = member.getId();
         this.firstName = member.getFirstName();
-        this.joinedDate = member.getJoinedDate();
         this.lastName = member.getLastName();
-        this.teamId = member.getTeamId();
+        this.address = member.getAddress();
+        this.joinedDate = member.getJoinedDate();
+        this.teamId = member.getTeam().getId();
+        this.team = member.getTeam();
     }
 
     @Override
     public String toString() {
+        String teamString = "";
+        if(team != null){
+            teamString = team.toString();
+        }
+
         return "MemberResDto{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", joinedDate='" + joinedDate + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", teamId='" + teamId + '\'' +
+                ", address='" + address + '\'' +
+                ", joinedDate='" + joinedDate + '\'' +
+                ", team='" + teamString + '\'' +
                 '}';
     }
 }

@@ -19,20 +19,22 @@ public class TeamResDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String foundedDate;
-    private String location;
-    private String mascot;
     private String name;
+    private String location;
+    private String foundedDate;
     private List<Member> members;
 
     public TeamResDto(Team team) {
         this.id = team.getId();
-        this.foundedDate = team.getFoundedDate();
-        this.location = team.getLocation();
-        this.mascot = team.getMascot();
         this.name = team.getName();
+        this.location = team.getLocation();
+        this.foundedDate = team.getFoundedDate();
         this.members = new ArrayList<>();
 
-        // TODO: member List 처리
+        if(team.getMembers() != null && team.getMembers().size() > 0){
+            for(Member member: team.getMembers()){
+                members.add(member);
+            }
+        }
     }
 }

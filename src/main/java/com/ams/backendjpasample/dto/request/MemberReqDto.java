@@ -4,8 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-
+import com.ams.backendjpasample.entity.Team;
 @Getter
 @Setter
 @Data
@@ -13,9 +12,11 @@ public class MemberReqDto {
 
     private Long id;
     private String firstName;
-    private String joinedDate;
     private String lastName;
-    private String teamId;
+    private String address;
+    private String joinedDate;
+    private Long teamId;
+    private Team team;
 
     // page options
     private int pageNumber;

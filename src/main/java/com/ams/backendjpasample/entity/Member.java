@@ -1,6 +1,9 @@
 package com.ams.backendjpasample.entity;
 
 import com.ams.backendjpasample.dto.request.MemberReqDto;
+import com.ams.backendjpasample.dto.response.MemberResDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,22 +27,37 @@ public class Member {
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
-    @Column(name = "JOINED_DATE", nullable = false)
-    private String joinedDate;
-
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
-    @Column(name = "TEAM_ID", nullable = false)
-    private String teamId;
+    @Column(name = "ADDRESS", nullable = false)
+    private String address;
+
+    @Column(name = "JOINED_DATE", nullable = false)
+    private String joinedDate;
+
+    @ManyToOne
+    @JoinColumn(name="team_id")
+    private Team team;
 
     public Member(MemberReqDto memberReqDto) {
         this.id = memberReqDto.getId();
         this.firstName = memberReqDto.getFirstName();
-        this.joinedDate = memberReqDto.getJoinedDate();
         this.lastName = memberReqDto.getLastName();
-        this.teamId = memberReqDto.getTeamId();
+        this.address = memberReqDto.getAddress();
+        this.joinedDate = memberReqDto.getJoinedDate();
+        this.team = new Team(memberReqDto.getTeamId());
     }
 
-
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", joinedDate='" + joinedDate + '\'' +
+                ", team=" + team.toString() +
+                '}';
+    }
 }

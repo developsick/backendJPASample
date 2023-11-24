@@ -24,7 +24,7 @@ public class MemberSpec {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
-                log.debug("TableMetaInfoSpec.selectData.toPredicate start");
+                log.debug("MemberSpec.selectData.toPredicate start");
                 List<Predicate> predicates = new ArrayList<>();
 
                 // 필터링 조건 추가
@@ -40,8 +40,6 @@ public class MemberSpec {
                 if( ObjectUtils.isNotEmpty(memberReqDto.getTeamIdFilter()) ) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("teamId"), memberReqDto.getTeamIdFilter())));
                 }
-
-                predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("dataSource").get("deleted"), false )));
 
                 // 키워드 검색 조건 추가
                 if( ObjectUtils.isNotEmpty(memberReqDto.getSearchString()) ) {

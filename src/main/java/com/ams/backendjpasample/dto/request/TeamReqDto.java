@@ -10,34 +10,34 @@ import lombok.Setter;
 public class TeamReqDto {
 
     private Long id;
-    private String firstName;
-    private String joinedDate;
-    private String lastName;
-    private String teamId;
+    private String name;
+    private String location;
+    private String foundedDate;
 
     // page options
     private int pageNumber;
     private int pageSize;
 
     // filters
-    private String firstNameFilter;
-    private String joinedDateFilter;
-    private String lastNameFilter;
-    private String teamIdFilter;
+    private String nameFilter;
+    private String locationFilter;
+    private String foundedDateFilter;
 
     // search
     private String searchString;
 
     @Override
     public String toString() {
-        return "MemberReqDto{" +
+        return "TeamReqDto{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", foundedDate='" + foundedDate + '\'' +
                 ", pageNumber=" + pageNumber +
                 ", pageSize=" + pageSize +
-                ", firstNameFilter='" + firstNameFilter + '\'' +
-                ", joinedDateFilter='" + joinedDateFilter + '\'' +
-                ", lastNameFilter='" + lastNameFilter + '\'' +
-                ", teamIdFilter='" + teamIdFilter + '\'' +
+                ", nameFilter='" + nameFilter + '\'' +
+                ", locationFilter='" + locationFilter + '\'' +
+                ", foundedDateFilter='" + foundedDateFilter + '\'' +
                 ", searchString='" + searchString + '\'' +
                 '}';
     }

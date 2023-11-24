@@ -9,6 +9,8 @@ import com.ams.backendjpasample.dto.request.TeamReqDto;
 import com.ams.backendjpasample.dto.response.AmsResDto;
 import com.ams.backendjpasample.dto.response.MemberResDto;
 import com.ams.backendjpasample.dto.response.TeamResDto;
+import com.ams.backendjpasample.entity.Member;
+import com.ams.backendjpasample.entity.Team;
 import com.ams.backendjpasample.service.SampleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,10 +49,11 @@ public class SampleController {
             @RequestBody MemberReqDto memberReqDto){
         log.debug("SampleController.getMembers start");
 
-        Page<MemberResDto> pageableList = sampleService.getMembers(memberReqDto);
+        //Page<MemberResDto> pageableList = sampleService.getMembers(memberReqDto);
+        Page<Member> pageableList = sampleService.getMembers(memberReqDto);
 
         ResMsgDto<ResPagingDto<MemberResDto>> response = new ResMsgDto<>(CommonError.SUCCESS);
-        response.setPageableBody(pageableList, MemberResDto.class, MemberResDto.class);
+        response.setPageableBody(pageableList, Member.class, MemberResDto.class);
         return new ResponseEntity<>( response, HttpStatus.OK);
     }
 
@@ -59,14 +62,12 @@ public class SampleController {
             @RequestBody TeamReqDto teamReqDto){
         log.debug("SampleController.getTeams start");
 
-        Page<TeamResDto> pageableList = sampleService.getTeams(teamReqDto);
+        Page<Team> pageableList = sampleService.getTeams(teamReqDto);
 
         ResMsgDto<ResPagingDto<TeamResDto>> response = new ResMsgDto<>(CommonError.SUCCESS);
-        response.setPageableBody(pageableList, TeamResDto.class, TeamResDto.class);
+        response.setPageableBody(pageableList, Team.class, TeamResDto.class);
         return new ResponseEntity<>( response, HttpStatus.OK);
     }
-
-
 
     @GetMapping("/member/{id}")
     public ResponseEntity<ResMsgDto<MemberResDto>> getMemberById(
@@ -81,6 +82,19 @@ public class SampleController {
         return new ResponseEntity<>( response, HttpStatus.OK);
     }
 
+    @GetMapping("/team/{id}")
+    public ResponseEntity<ResMsgDto<TeamResDto>> getTeamById(
+            @PathVariable(name = "id") Long id){
+
+        log.debug("SampleController.getTeamById start");
+
+        TeamResDto res = sampleService.getTeamById(id);
+
+        ResMsgDto<TeamResDto> response = new ResMsgDto<>(CommonError.SUCCESS);
+        response.setBody(res);
+        return new ResponseEntity<>( response, HttpStatus.OK);
+    }
+
     @PutMapping("/member")
     public ResponseEntity<ResMsgDto<MemberResDto>> saveMember(
             @RequestBody MemberReqDto memberReqDto){
@@ -89,6 +103,19 @@ public class SampleController {
 
         MemberResDto res = sampleService.saveMember(memberReqDto);
         ResMsgDto<MemberResDto> response = new ResMsgDto<>();
+        response.setBody(res);
+
+        return new ResponseEntity<>( response, HttpStatus.OK);
+    }
+
+    @PutMapping("/team")
+    public ResponseEntity<ResMsgDto<TeamResDto>> saveTeam(
+            @RequestBody TeamReqDto teamReqDto){
+
+        log.debug("SampleController.saveTeam start");
+
+        TeamResDto res = sampleService.saveTeam(teamReqDto);
+        ResMsgDto<TeamResDto> response = new ResMsgDto<>();
         response.setBody(res);
 
         return new ResponseEntity<>( response, HttpStatus.OK);
@@ -107,6 +134,17 @@ public class SampleController {
         return new ResponseEntity<>( response, HttpStatus.OK);
     }
 
+    @PatchMapping("/team")
+    public ResponseEntity<ResMsgDto<TeamResDto>> updateTeam(
+            @RequestBody TeamReqDto teamReqDto){
 
+        log.debug("SampleController.updateTeam start");
+
+        TeamResDto res = sampleService.updateTeam(teamReqDto);
+        ResMsgDto<TeamResDto> response = new ResMsgDto<>();
+        response.setBody(res);
+
+        return new ResponseEntity<>( response, HttpStatus.OK);
+    }
 
 }
